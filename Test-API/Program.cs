@@ -110,18 +110,30 @@ namespace Test_API
                         chMax[(uint)b322_config_channel_e.B322_CONFIG_TRIGGER_CHANNEL_B] = Math.Max(chMax[(uint)b322_config_channel_e.B322_CONFIG_TRIGGER_CHANNEL_B], sample);
                     }
 
-                    Console.WriteLine($"- ch A: count = {data_channel_a.Length}");
-                    for (var i = 0; i < data_channel_a.Length; i++)
+                    Console.WriteLine($"Data chanel a: min = {chMin[0]}, max = {chMax[0]}");
+                    var counter = 0;
+                    foreach (var number in data_channel_a)
                     {
-                        Console.Write($"{i} : {data_channel_a[i]}, ");
+                        if (counter % 10 != 0)
+                        {
+                            Console.Write($"{number:F3}\t");
+                        }
+                        else Console.WriteLine("");
+                        counter++;
                     }
-                    Console.WriteLine($"\n- ch B: count = {data_channel_a.Length}");
-                    for (var i = 0; i < data_channel_a.Length; i++)
+                    Console.WriteLine($"Data chanel a: min = {chMin[1]}, max = {chMax[1]}");
+                    counter = 0;
+                    foreach (var number in data_channel_b)
                     {
-                        Console.Write($"{i} : {data_channel_b[i]}, ");
+                        if (counter % 10 != 0)
+                        {
+                            Console.Write($"{number:F3}\t");
+                        }
+                        else Console.WriteLine("");
+                        counter++;
                     }
 
-                    B322_api.b322_stop_measurement(device);
+                    b322_stop_measurement(device);
 
                     break;
                 case b322_status_e.B322_STATUS_MEAS_ABORT:
